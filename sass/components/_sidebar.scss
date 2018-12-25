@@ -1,0 +1,237 @@
+//
+// @description :
+// @author      : Adarsh Pastakia
+// @copyright   : 2017
+// @license     : MIT
+
+.ui-sidebar {
+  z-index   : 5;
+  position  : relative;
+  background: $drawer-bg;
+  max-width : 30%;
+  border    : 0 solid rgba($base-border-color, .25);
+  @include flex(0 0 $sidebar-width);
+  @include transition(max-width 0.5s);
+
+  .ui-sidebar-head {
+    z-index      : 5;
+    line-height  : 2em;
+    // background   : $drawer-bg;
+    border-bottom: 1px solid rgba($base-border-color, .25);
+
+    .ui-sidebar-title {
+      color         : rgba($base-text, .75);
+      pointer-events: none;
+      padding       : 0 0.5em;
+      font-size     : 1.1em;
+      left          : 0;
+      top           : 0;
+      @include ellipsis();
+      @include transition(all 0.25s);
+      @include transform-origin(0 0 0);
+    }
+
+    .ui-sidebar-close {
+      padding: 0 0.5em;
+    }
+
+  }
+
+  .ui-sidebar-content {
+    border: 0 solid $base-border-color;
+  }
+
+  &.ui-sidebar-compact {
+    font-size: 0.6em;
+
+    .ui-menu-label {
+      display: none;
+    }
+  }
+
+  &.ui-sidebar-start {
+    order       : -1;
+    border-width: 0 1px 0 0;
+
+    .ui-sidebar-close {}
+
+    &.ui-sidebar-collapse {
+      .ui-sidebar-close {}
+
+      &:not(.ui-sidebar-mini) {
+        .ui-sidebar-content {
+          left        : -1 * $sidebar-collapse-width;
+          border-width: 0 1px 0 0;
+          @include transition(left 0.5s);
+        }
+
+        &.ui-sidebar-show {
+          .ui-sidebar-content {
+            left      : 2em;
+            box-shadow: 25px 0 50px 5px rgba($base-shadow-color, .25);
+          }
+        }
+      }
+    }
+  }
+
+  &.ui-sidebar-end {
+    order       : 1;
+    border-width: 0 0 0 1px;
+
+    .ui-sidebar-head {
+      flex-direction: row-reverse;
+    }
+
+    .ui-sidebar-close {}
+
+    &.ui-sidebar-collapse {
+      .ui-sidebar-close {}
+
+      &:not(.ui-sidebar-mini) {
+        .ui-sidebar-content {
+          right       : -1 * $sidebar-collapse-width;
+          border-width: 0 0 0 1px;
+          @include transition(right 0.5s);
+        }
+
+        &.ui-sidebar-show {
+          .ui-sidebar-content {
+            right     : 2em;
+            box-shadow: -25px 0 50px 5px rgba($base-shadow-color, .25);
+          }
+        }
+      }
+    }
+  }
+
+  &.ui-sidebar-collapse {
+    .ui-sidebar-title {
+      @include transform(rotate(90deg) translate(2em,-100%));
+      position: absolute;
+    }
+
+    &:not(.ui-sidebar-mini) {
+      z-index  : 10;
+      max-width: 2em;
+
+      .ui-sidebar-content {
+        width           : $sidebar-collapse-width;
+        z-index         : $z-index-floating;
+        background-color: $drawer-bg;
+        @include position(absolute, 0 auto);
+      }
+
+      &.ui-sidebar-show {
+        .ui-affix-content.ui-animate {
+          top: 0 !important;
+        }
+      }
+    }
+
+    &.ui-sidebar-mini {
+      max-width: 4em !important;
+
+      .ui-sidebar-title {
+        visibility: hidden;
+      }
+
+      .ui-menu-item {
+        padding      : 0.5em 0;
+        text-overflow: clip;
+        flex-wrap    : wrap;
+
+        .ui-menu-icon {
+          font-size : 2em;
+          width     : 1em;
+          height    : 1em;
+          text-align: center;
+          margin    : 0.25em 0.5em;
+        }
+
+        .ui-menu-label {
+          font-size    : 0.8em;
+          max-width    : 4rem;
+          line-height  : 1.25em;
+          display      : block;
+          text-align   : center;
+          text-overflow: ellipsis;
+          overflow     : hidden;
+        }
+
+        .ui-badge {
+          position: absolute;
+          right   : 0;
+          top     : 50%;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width : $grid-md-min) {
+  .ui-sidebar.ui-sidebar-collapse .ui-sidebar-title {
+    @include transform(rotate(90deg) translate(0,-100%));
+  }
+}
+
+.rtl,
+[dir="rtl"] {
+  .ui-sidebar {
+    .ui-sidebar-close .ui-icon {
+      @include transform(scaleX(-1));
+    }
+
+    &.ui-sidebar-start {
+      border-width: 0 0 0 1px;
+
+      .ui-sidebar-close {}
+
+      &.ui-sidebar-collapse {
+        .ui-sidebar-close {}
+
+        &:not(.ui-sidebar-mini) {
+          .ui-sidebar-content {
+            left        : auto;
+            border-width: 0 0 0 1px;
+            right       : -1 * $sidebar-collapse-width;
+            @include transition(right 0.5s);
+          }
+
+          &.ui-sidebar-show {
+            .ui-sidebar-content {
+              right     : 2em;
+              box-shadow: -25px 0 50px 5px rgba($base-shadow-color, .25);
+            }
+          }
+        }
+      }
+    }
+
+    &.ui-sidebar-end {
+      border-width: 0 1px 0 0;
+
+      .ui-sidebar-close {}
+
+      &.ui-sidebar-collapse {
+        .ui-sidebar-close {}
+
+        &:not(.ui-sidebar-mini) {
+          .ui-sidebar-content {
+            right       : auto;
+            border-width: 0 1px 0 0;
+            left        : -1 * $sidebar-collapse-width;
+            @include transition(left 0.5s);
+          }
+
+          &.ui-sidebar-show {
+            .ui-sidebar-content {
+              left      : 2em;
+              box-shadow: 25px 0 50px 5px rgba($base-shadow-color, .25);
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,251 @@
+//
+// @description :
+// @author      : Adarsh Pastakia
+// @copyright   : 2016
+// @license     : MIT
+@include keyframes(spin) {
+  0% {
+    @include transform(rotate(0deg));
+  }
+
+  100% {
+    @include transform(rotate(360deg));
+  }
+}
+@include keyframes(spin-opp) {
+  0% {
+    @include transform(rotate(0deg));
+  }
+
+  100% {
+    @include transform(rotate(-360deg));
+  }
+}
+@include keyframes(pendulum) {
+  0% {
+    @include transform(rotate(0deg));
+  }
+
+  50% {
+    @include transform(rotate(180deg));
+  }
+
+  100% {
+    @include transform(rotate(0deg));
+  }
+}
+@include keyframes(pulse) {
+  0% {
+    @include transform(scale(.75));
+  }
+
+  100% {
+    @include transform(scale(2));
+  }
+}
+@include keyframes(ripple) {
+  0% {
+    opacity: 0;
+    @include transform(scale(.5));
+  }
+
+  50% {
+    opacity: 0.75;
+  }
+
+  100% {
+    opacity: 0;
+    @include transform(scale(2));
+  }
+}
+@include keyframes(color) {
+  0% {
+    color: $info;
+  }
+
+  24% {
+    color: $info;
+  }
+
+  25% {
+    color: $danger;
+  }
+
+  49% {
+    color: $danger;
+  }
+
+  50% {
+    color: $success;
+  }
+
+  74% {
+    color: $success;
+  }
+
+  75% {
+    color: $warning;
+  }
+
+  99% {
+    color: $warning;
+  }
+
+  100% {
+    color: $info;
+  }
+}
+@include keyframes(icon) {
+  0% {
+    content: '$fi-ui-load1';
+  }
+
+  25% {
+    content: '$fi-ui-load2';
+  }
+
+  50% {
+    content: '$fi-ui-load3';
+  }
+
+  75% {
+    content: '$fi-ui-load4';
+  }
+}
+
+[class*='ui-anim-'],
+[class^='ui-anim-'] {
+
+  display    : inline-block;
+  text-align : center;
+
+  width      : 1em;
+  height     : 1em;
+  line-height: 1;
+  @include transform-origin(center);
+
+  &.ui-anim-spin {
+    @include animation(spin 2.5s linear infinite);
+  }
+
+  &.ui-anim-spin-opp {
+    @include animation(spin-opp 2.5s linear infinite);
+  }
+
+  &.ui-anim-pulse {
+    @include animation(spin 1s infinite steps(8));
+  }
+
+  &.ui-anim-pendulum {
+    @include animation(pendulum 1s linear infinite);
+  }
+
+  &.ui-anim-color {
+    @include animation(color 60s linear infinite);
+  }
+
+  &.ui-anim-busy {
+    @include animation(spin 1.5s infinite steps(12));
+  }
+
+  &.ui-anim-loader {
+    @include animation(spin 2s infinite linear, color 8s linear infinite);
+  }
+
+  &.ui-anim-ripple {
+    position: relative;
+
+    &:after,
+    &:before {
+      content      : '';
+      margin       : auto;
+      width        : 1em;
+      height       : 1em;
+      border-radius: 1em;
+      opacity      : 0;
+      border       : 1px solid $white;
+      @include transform(scale(.5));
+      @include position(absolute, 0);
+      @include animation(ripple 1.5s infinite);
+    }
+
+    &:before {
+      border-color: $secondary;
+      @include animation-delay(0.75s);
+    }
+
+    &:after {
+      border-color: $primary;
+    }
+  }
+}
+
+// Page animations
+/* animate page transitions */
+.au-enter-active:not(.ui-dialog-wrapper) {
+  @include animation(viewEnter 0.3s ease-out both);
+}
+
+.au-leave-active:not(.ui-dialog-wrapper) {
+  @include animation(viewLeave 0.3s ease-in both);
+}
+
+$dialog-anim-time: .3s;
+.au-enter-active.ui-dialog-wrapper {
+  @include animation(dialogWrapper $dialog-anim-time ease-in both);
+  .ui-dialog {
+    @include animation(dialogEnter $dialog-anim-time ease-out both);
+  }
+}
+
+.au-leave-active.ui-dialog-wrapper {
+  @include animation(dialogWrapper $dialog-anim-time ease-in both);
+  .ui-dialog {
+    @include animation(dialogLeave $dialog-anim-time ease-in both);
+  }
+}
+
+.au-stagger {
+  /* 50ms will be applied between each successive enter operation */
+  -webkit-animation-delay: 50ms;
+  animation-delay        : 50ms;
+}
+
+/* animation definitions */
+@include keyframes(viewEnter) {
+  from {
+    opacity: 0;
+    // @include transform(scale(.7));
+    @include transform(translate3d(50%, 0, 0));
+  }
+}
+@include keyframes(viewLeave) {
+  to {
+    opacity: 0;
+    // @include transform(scale(.7));
+    @include transform(translate3d(-50%, 0, 0));
+  }
+}
+/* animation definitions */
+@include keyframes(dialogEnter) {
+  from {
+    opacity: 0;
+    @include transform(scale(.7));
+    // @include transform(translate3d(50%, 0, 0));
+  }
+}
+@include keyframes(dialogLeave) {
+  to {
+    opacity: 0;
+    @include transform(scale(.7));
+    // @include transform(dialogLeave(-50%, 0, 0));
+  }
+}
+@include keyframes(dialogWrapper) {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+  }
+}

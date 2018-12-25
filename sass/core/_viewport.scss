@@ -1,0 +1,107 @@
+//
+// @description :
+// @author      : Adarsh Pastakia
+// @copyright   : 2017
+// @license     : MIT
+.ui-splash {
+  background-color: white;
+  z-index         : $z-index-splash;
+  @include position(fixed, 0);
+}
+
+.ui-viewport {
+  position: fixed;
+  overflow: hidden;
+  width   : 100vw;
+  height  : 100vh;
+
+  .ui-router-view {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .ui-viewport-banner {
+    background: $app-banner-bg;
+    color     : $app-banner-text;
+    padding   : 0 nth($base-padding, 2);
+    text-align: center;
+  }
+
+  .ui-viewport-header {
+    background: $app-header-bg;
+    color     : $app-header-text;
+    height    : $app-header-height;
+    padding   : $base-padding;
+
+    .ui-drawer-toggle {
+      font-size: 1.5em;
+      color    : $app-header-text;
+
+      &:hover {
+        color: rgba($app-header-link-text, .75);
+      }
+
+      &:active {
+        color: rgba($app-header-link-text, .5);
+      }
+    }
+
+    .ui-viewport-title {
+      font-size  : 1.5em;
+      line-height: 1.25;
+      font-weight: 300;
+
+      > img {
+        max-height: $app-header-height - 1.5em;
+        @include margin(end, .5em);
+      }
+
+      small {
+        display  : block;
+        font-size: .9rem;
+      }
+    }
+
+    a {
+      color: inherit;
+    }
+  }
+
+  .ui-viewport-footer {
+    font-size : .7em;
+    background: $app-footer-bg;
+    color     : $app-footer-text;
+    padding   : 0 nth($base-padding, 2);
+
+    .ui-link {
+      color: $app-footer-link-text;
+
+      &:hover {
+        color: $app-footer-link-hover-text;
+      }
+    }
+  }
+
+  .ui-dialog-container {
+    pointer-events: none;
+    z-index       : $z-index-dialog;
+    @include position(absolute, 0);
+
+    &.ui-dragging {
+      pointer-events: all;
+    }
+  }
+
+  .ui-overlay-container {
+    overflow      : visible;
+    padding       : 3em 0 1em;
+    pointer-events: none;
+    z-index       : $z-index-toast;
+    @include position(absolute, 0);
+
+    .ui-toast {
+      max-width : 24rem;
+      box-shadow: 0 0 .5em 0 rgba(0,0,0,0.25);
+    }
+  }
+}

@@ -1,0 +1,157 @@
+//
+// @description :
+// @author      : Adarsh Pastakia
+// @copyright   : 2017
+// @license     : MIT
+
+.ui-toast {
+  display       : block;
+  max-height    : 0;
+  margin        : .25rem .5rem;
+  cursor        : pointer;
+  pointer-events: all;
+  overflow      : hidden;
+  color         : $dark;
+  background    : $light;
+  border        : 1px solid $base-border-color;
+  border-radius : $base-border-radius;
+  box-shadow    : 1px 1px 3px 0 rgba($base-shadow-color, .25);
+  @include transition(max-height .5s ease-in);
+
+  &.ui-open {
+    max-height                : 5rem;
+    transition-timing-function: ease-out;
+  }
+
+  .ui-close,
+  .ui-icon {
+    @include flex-auto();
+  }
+
+  .ui-wrapper {
+    padding: .5em 1em;
+    @include flexbox($direction: row, $wrap:false,$align: flex-start);
+
+    .ui-icon {
+      font-size  : 2em;
+      text-shadow: -1px -1px 0 rgba(0, 0, 0, .1);
+    }
+  }
+
+  .ui-close {
+    text-shadow: -1px -1px 0 rgba(0, 0, 0, .1);
+  }
+
+  .ui-message {
+    line-height: 1.25;
+    padding    : 0 .5em;
+    align-self : center;
+    @include flex(1 1 auto);
+
+    h1 {
+      font-weight: 600;
+      margin     : 0;
+      font-size  : 1.25em;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+}
+@include toast-theme(dark, lighten($dark,5%), $white);
+@include toast-theme(muted, $muted, $dark);
+@include toast-theme(primary, lighten($primary,5%), $white);
+@include toast-theme(secondary, lighten($secondary,5%), $white);
+@include toast-theme(info, lighten($info,5%), $white);
+@include toast-theme(danger, lighten($danger,5%), $white);
+@include toast-theme(success, lighten($success,5%), $white);
+@include toast-theme(warning, lighten($warning,5%), $dark);
+
+.ui-alert-shim {
+  pointer-events: all;
+  z-index       : $z-index-dialog+10;
+  background    : rgba(0,0,0,.05);
+  @include position(fixed,0);
+
+  &.ui-open .ui-alert {
+    opacity: 1;
+    @include transform(translate(-50%,-50%) scale(1));
+  }
+
+  .ui-alert {
+    top          : 50%;
+    left         : 50%;
+    position     : fixed;
+    background   : $base-bg;
+    min-width    : 18rem;
+    opacity      : 0;
+    z-index      : $z-index-dialog+15;
+    border-radius: $base-border-radius;
+    box-shadow   : 0 0 30px 0 rgba(0,0,0,.3);
+    @include transition(transform .2s, opacity .2s);
+    @include transform(translate(-50%,-50%) scale(0.5));
+
+    .ui-wrapper {
+      padding : 1rem 1.5rem;
+      overflow: hidden;
+      @include flexbox($direction: row, $wrap:false,$align: flex-start);
+
+      .ui-icon {
+        font-size  : 2em;
+        text-shadow: -1px -1px 0 rgba(0, 0, 0, .1);
+      }
+    }
+
+    .ui-message {
+      padding    : 0 .5em;
+      line-height: 1.25;
+      align-self : center;
+      @include flex(1 1 auto);
+
+      h1 {
+        font-weight: 400;
+        margin     : 0;
+        font-size  : 1.25em;
+      }
+
+      p {
+        margin: 0;
+      }
+    }
+
+    .ui-input-group {
+      margin: 0 1.5rem 1.5rem;
+    }
+
+    .ui-button-bar {
+      box-shadow: 0 1px 0 0 rgba(0,0,0,.05) inset;
+      @include flexbox($direction: row, $wrap:false,$align: stretch, $justify:center);
+
+      button {
+        min-width : 7rem;
+        padding   : .75em 1em;
+        font-size : 1em;
+        color     : rgba($base-text, .75);
+        border    : none;
+        background: rgba($light, .1);
+        @include flex-fill();
+        @include border(start, 1px solid rgba($dark,.1));
+
+        &:first-child {
+          font-weight: 400;
+          color      : $secondary;
+          border     : none;
+        }
+
+        &:hover {
+          background: rgba($black, .1);
+        }
+
+        &:active {
+          background: rgba($black, .3);
+        }
+      }
+    }
+  }
+}

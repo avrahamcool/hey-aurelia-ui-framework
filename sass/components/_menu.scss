@@ -1,0 +1,322 @@
+//
+// @description :
+// @author      : Adarsh Pastakia
+// @copyright   : 2017
+// @license     : MIT
+
+a.ui-menu-item {
+  min-height: 2.5em;
+  margin    : 0.2em 0;
+  position  : relative;
+  cursor    : pointer;
+  color     : $menu-link-text;
+  // max-width  : 20em;
+  padding   : 0 0.5em;
+  text-align: left;
+  text-align: start;
+  @include flexbox($direction: row, $display: inline-flex, $wrap: false, $align: center);
+  @include ellipsis(false);
+  @include transition(background-color 0.2s);
+
+  .ui-menu-label {
+    line-height: 1.25;
+    padding    : 0.5em;
+    @include flex-fill();
+
+    small {
+      font-size         : 0.8em;
+      color             : $muted;
+      max-height        : 2.5em;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      display           : -webkit-box;
+    }
+  }
+
+  .ui-menu-icon {
+    background-position: left center;
+    background-repeat  : no-repeat;
+    background-size    : 1em 1em;
+    @include transition(font-size 0.25s, margin 0.25s);
+  }
+
+  &:hover {
+    color           : $menu-link-hover-text;
+    background-color: $menu-link-hover-bg;
+
+    small {
+      color: rgba($menu-link-hover-text, .7);
+    }
+  }
+
+  &:active {
+    color           : $menu-link-active-text;
+    background-color: $menu-link-active-bg;
+  }
+
+  &.ui-disabled {
+    pointer-events: none;
+    color         : $menu-link-disabled;
+  }
+
+  &.ui-active {
+    pointer-events  : none;
+    color           : $menu-link-active-text;
+    background-color: $menu-link-active-bg;
+    @include box-shadow(0 -4px 0 0 $menu-link-active-hilight inset);
+
+    small {
+      color: rgba($menu-link-active-text, .7);
+    }
+  }
+}
+
+.ui-menu-section-title {
+  color      : $menu-section-title;
+  display    : block;
+  font-size  : 0.9em;
+  line-height: 2em;
+  padding    : 0 0.5em;
+  @include ellipsis(false);
+
+  &:before {
+    margin: 0 -.25em;
+  }
+}
+
+.ui-menubar {
+  z-index         : 5;
+  position        : relative;
+  background-color: $menubar-bg;
+  @include flex(0 0 auto);
+  @include flexbox($direction: row, $align: center, $wrap:false);
+
+  .ui-menubar-toggle {
+    min-width : 2em;
+    text-align: center;
+    cursor    : pointer;
+    color     : $menu-link-text;
+  }
+
+  .ui-menubar-overflow {
+    display  : none;
+    min-width: 10em;
+
+    &.ui-open {
+      display: block;
+    }
+
+    .ui-menu-section {
+      margin: 0;
+    }
+
+    a.ui-menu-item {
+      &:hover {
+        @include box-shadow(4px 0 0 0 $menu-link-hover-bg inset);
+      }
+
+      &.ui-active {
+        @include box-shadow(4px 0 0 0 $menu-link-active-hilight inset);
+      }
+    }
+  }
+
+  .ui-menubar-wrapper {
+    overflow: hidden;
+    @include flex(1 1 auto);
+    @include flexbox($direction: row, $align: stretch, $wrap:false);
+  }
+
+  .ui-menu-section {
+    display      : block;
+    overflow     : hidden;
+    margin       : 0.1em 0.2em;
+    flex         : 0 0 auto;
+    background   : rgba($base-bg, .25);
+    border       : 1px solid rgba($base-border-color, .25);
+    border-radius: $base-border-radius;
+
+    .ui-menu-section-title {
+      font-size  : 0.8em;
+      line-height: 1.5;
+    }
+  }
+
+  .ui-menu-section-title {
+    text-align: center;
+  }
+
+  .ui-divider {
+    display   : block;
+    align-self: stretch;
+    border    : {
+      left : 1px solid rgba($base-text,.5);
+      right: 1px solid $base-bg;
+    }
+    @include transform(scaleX(.5));
+  }
+
+  a.ui-menu-item {
+    margin     : 0;
+    font-size  : 0.9em;
+    padding    : 0.25em 0.5em;
+    white-space: nowrap;
+    height     : 2.5em;
+    line-height: 2em;
+
+    &:hover {
+      @include box-shadow(0 -4px 0 0 $menu-link-hover-bg inset);
+    }
+
+    &.ui-active {
+      @include box-shadow(0 -4px 0 0 $menu-link-active-hilight inset);
+    }
+  }
+}
+
+.ui-menu {
+  &.ui-inline {
+    max-width: 20em;
+  }
+
+  &:not(.ui-floating) {
+    display: block;
+  }
+
+  > .ui-row {
+    flex-wrap  : nowrap;
+    align-items: stretch;
+  }
+
+  > .ui-row > .ui-column {
+    @include flex-auto();
+    min-width: 8em;
+    max-width: 12em;
+  }
+
+  > .ui-row > .ui-column:not(:first-child) {
+    @include border(start, 1px solid rgba($base-border-color,.5));
+  }
+
+  &.ui-floating {
+    max-height      : 20rem;
+    background-color: $menu-dropdown-bg;
+
+    .ui-menu-item {
+      line-height: 2em;
+      font-size  : 0.9em;
+    }
+  }
+
+  .ui-menu-section {
+    display : block;
+    overflow: hidden;
+    border  : none;
+
+    .ui-menu-section-title {
+      text-align: left;
+      text-align: start;
+    }
+
+    &.ui-collapsible {
+      .ui-menu-section-title {
+        cursor: pointer;
+
+        &.ui-has-active span:after {
+          width        : 6px;
+          height       : 6px;
+          border-radius: 3px;
+          background   : $primary;
+          margin       : 0.5em 6px;
+        }
+
+        .ui-icon {
+          font-size   : 0.8em;
+          margin-right: 0.5em;
+          @include transition(transform 0.5s);
+        }
+      }
+
+      .ui-menu-section-body {
+        max-height: 100vh;
+        overflow  : hidden;
+        @include transition(max-height 0.5s);
+      }
+
+      &.ui-collapsed {
+        .ui-icon {
+          @include transform(rotate(-90deg));
+        }
+
+        .ui-menu-section-body {
+          max-height: 0;
+        }
+      }
+    }
+  }
+
+  > .ui-menu-section-title:not(:first-child):before,
+  .ui-column > .ui-menu-section-title:not(:first-child):before,
+  > .ui-menu-section:not(:first-child) > .ui-menu-section-title:before {
+    content: '';
+    display: block;
+    border : {
+      top   : 1px solid rgba($dark, .5);
+      bottom: 1px solid rgba($light,.5);
+    }
+    @include transform(scaleY(.5));
+  }
+
+  .ui-divider {
+    display: block;
+    border : {
+      top   : 1px solid $dark;
+      bottom: 1px solid $light;
+    }
+    opacity: 0.5;
+    @include transform(scaleY(.5));
+  }
+
+  .ui-menu-item {
+    display: flex;
+
+    &:hover {
+      @include box-shadow(4px 0 0 0 $menu-link-active-bg inset);
+    }
+
+    &.ui-active {
+      color           : $menu-link-active-text;
+      background-color: $menu-link-active-bg;
+      @include box-shadow(4px 0 0 0 $menu-link-active-hilight inset);
+    }
+  }
+}
+
+.rtl,
+[dir="rtl"] {
+  .ui-menu-item {
+    &:hover {
+      @include box-shadow(-4px 0 0 0 $menu-link-active-bg inset);
+    }
+
+    &.ui-active {
+      @include box-shadow(-4px 0 0 0 $menu-link-active-hilight inset);
+    }
+  }
+
+  .ui-menu .ui-menu-section {
+    &.ui-collapsible {
+      .ui-menu-section-title {
+        .ui-icon {
+          margin-left: 0.5em;
+        }
+      }
+
+      &.ui-collapsed {
+        .ui-icon {
+          @include transform(rotate(90deg));
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+<!--
+// @author      : Adarsh Pastakia
+// @copyright   : 2017
+// @license     : MIT
+-->
+<template>
+  <ui-page animate>
+    <x-container source.bind="source" wiki.bind="wiki" page-title="Tab Panels" need-rtl="true">
+      <h4 class="x-title">Simple Tab Panel</h4>
+      <!-- <div ref="tabLabel">
+        <p>Hello</p>
+        <small>Wols</small>
+      </div> -->
+      <ui-row>
+        <ui-column size="lg-6 md-12" class="ui-nooverflow">
+          <h6 class="x-title">Top<small>Using compose element</small></h6>
+          <div class="x-view ui-border-none">
+            <ui-tab-panel active-tab.bind="activeTab">
+              <ui-tab view-model="../inputs/buttons">View Model</ui-tab>
+              <ui-tab closeable view="../home/lipsum-page.html">View</ui-tab>
+              <ui-tab disabled="true">Disabled</ui-tab>
+              <compose view.bind="activeTab.view" view-model.bind="activeTab.viewModel"></compose>
+            </ui-tab-panel>
+          </div>
+        </ui-column>
+        <ui-column size="lg-6 md-12" class="ui-nooverflow">
+          <h6 class="x-title">Bottom<small>Using router-view element</small></h6>
+          <div class="x-view ui-border-none">
+            <ui-tab-panel use-router bottom>
+              <ui-tab repeat.for="route of router.navigation" active.bind="route.isActive" href.bind="route.href" closeable="true">${route.title}</ui-tab>
+              <ui-router-view></ui-router-view>
+            </ui-tab-panel>
+          </div>
+        </ui-column>
+      </ui-row>
+    </x-container>
+  </ui-page>
+</template>

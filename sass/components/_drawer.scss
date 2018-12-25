@@ -1,0 +1,129 @@
+//
+// @description :
+// @author      : Adarsh Pastakia
+// @copyright   : 2017
+// @license     : MIT
+.ui-drawer-toggle {
+  cursor     : pointer;
+  margin     : 0 0.5em;
+  display    : inline-block;
+  line-height: 1;
+  color      : $primary;
+
+  &:hover {
+    color: $secondary;
+  }
+}
+
+.ui-drawer {
+  pointer-events: none;
+  z-index       : $z-index-drawer;
+  @include position(absolute, 0);
+
+  &.ui-drawer-fixed {
+    @include position(fixed, 0);
+  }
+
+  &.ui-drawer-fluid > .ui-drawer-content {
+    width: 70vw;
+  }
+
+  &.ui-drawer-large > .ui-drawer-content {
+    width: $drawer-width*1.5;
+  }
+
+  > .ui-drawer-content {
+    z-index         : 1;
+    overflow        : hidden;
+    width           : $drawer-width;
+    max-width       : 90%;
+    pointer-events  : all;
+    background-color: $drawer-bg;
+    border          : 1px solid transparent;
+    border-width    : 0 1px;
+    @include position(absolute, 0 auto);
+    @include transition(all 0.5s);
+
+    > .ui-drawer-close {
+      width      : 100%;
+      line-height: 2em;
+      padding    : 0 0.5em;
+      margin-top : -.25em;
+      color      : $secondary;
+    }
+  }
+
+  > .ui-drawer-shim {
+    z-index       : 0;
+    display       : none;
+    background    : $drawer-shim;
+    pointer-events: all;
+    @include position(absolute, 0);
+  }
+
+  &.ui-drawer-start {
+    > .ui-drawer-content {
+      left: 0;
+      @include transform(translateX(-100%));
+
+      > .ui-drawer-close {
+        text-align: right;
+        text-align: end;
+      }
+    }
+  }
+
+  &.ui-drawer-end {
+    > .ui-drawer-content {
+      right: 0;
+      @include transform(translateX(100%));
+
+      > .ui-drawer-close {
+        text-align: left;
+        text-align: start;
+      }
+    }
+  }
+
+  &.ui-drawer-show {
+    & > .ui-drawer-content {
+      @include transform(translateX(0));
+      border-color: rgba($base-border-color,.5);
+      box-shadow  : 0 0 50px 0 $base-shadow-color;
+    }
+
+    & > .ui-drawer-shim {
+      display: block;
+    }
+  }
+}
+
+.rtl,
+[dir="rtl"] {
+  .ui-drawer {
+    .ui-drawer-close .ui-icon {
+      @include transform(scaleX(-1));
+    }
+
+    &.ui-drawer-start {
+      > .ui-drawer-content {
+        right: 0;
+        left : auto;
+        @include transform(translateX(100%));
+      }
+    }
+
+    &.ui-drawer-end {
+      > .ui-drawer-content {
+        left : 0;
+        right: auto;
+        @include transform(translateX(-100%));
+      }
+    }
+
+    &.ui-drawer-show > .ui-drawer-content {
+      @include transform(translateX(0));
+    }
+
+  }
+}

@@ -1,0 +1,21 @@
+//
+// @description :
+// @author      : Adarsh Pastakia
+// @copyright   : 2017
+// @license     : MIT
+
+@import "sass/colors";
+
+.x-tabbed-layout {
+  .ui-tabbar .tab-home {
+    min-width: 3em;
+
+    .ui-label {
+      display: none;
+    }
+  }
+
+  .ui-tabbar {
+    background: $white;
+  }
+}

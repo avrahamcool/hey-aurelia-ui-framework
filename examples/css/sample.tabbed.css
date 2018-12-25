@@ -1,0 +1,7 @@
+.x-tabbed-layout .ui-tabbar .tab-home {
+  min-width: 3em; }
+  .x-tabbed-layout .ui-tabbar .tab-home .ui-label {
+    display: none; }
+
+.x-tabbed-layout .ui-tabbar {
+  background: #FFFEFC; }

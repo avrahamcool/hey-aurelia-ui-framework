@@ -1,0 +1,183 @@
+//
+// @description :
+// @author      : Adarsh Pastakia
+// @copyright   : 2017
+// @license     : MIT
+
+.ui-tooltip {
+  font-size    : 0.8em;
+  min-width    : 2em;
+  position     : fixed;
+  padding      : 0.5em 1rem;
+  border-radius: $base-border-radius;
+  opacity      : 0;
+  z-index      : $z-index-floating;
+  visibility   : hidden;
+  white-space  : nowrap;
+  background   : $light;
+  box-shadow   : 0 0 5px 1px rgba(0,0,0,.5);
+  @include transition(opacity 500ms);
+
+  &:after {
+    border  : 0 solid transparent;
+    position: absolute;
+    width   : 0.5em;
+    height  : 0.5em;
+    content : '';
+    color   : $light;
+  }
+
+  &.ui-tether-bottom {
+    margin-top: -0.5em;
+  }
+
+  &.ui-tether-top {
+    margin-top: 0.5em;
+  }
+
+  &.ui-tether-left {
+    margin-left: -0.5em;
+  }
+
+  &.ui-tether-right {
+    margin-left: 0.5em;
+  }
+
+  &.ui-tether-bottom:after {
+    border-top-color: currentcolor;
+    border-width    : 0.5em 0.5em 0 0.5em;
+    bottom          : -.49em;
+    left            : 50%;
+    margin-left     : -0.5em;
+  }
+
+  &.ui-tether-top:after {
+    border-bottom-color: currentcolor;
+    border-width       : 0 0.5em 0.5em 0.5em;
+    top                : -.49em;
+    left               : 50%;
+    margin-left        : -0.5em;
+  }
+
+  &.ui-tether-left:after {
+    border-left-color: currentcolor;
+    border-width     : 0.5em 0 0.5em 0.5em;
+    right            : -.5em;
+    top              : 50%;
+    margin-top       : -0.5em;
+  }
+
+  &.ui-tether-right:after {
+    border-right-color: currentcolor;
+    border-width      : 0.5em 0.5em 0.5em 0;
+    left              : -.5em;
+    top               : 50%;
+    margin-top        : -0.5em;
+  }
+
+  &.ui-show {
+    opacity   : 1;
+    visibility: visible;
+  }
+}
+@include tooltip-theme(primary, $primary, contrast-color($primary));
+@include tooltip-theme(secondary, $secondary, contrast-color($secondary));
+@include tooltip-theme(dark, $dark, contrast-color($dark));
+@include tooltip-theme(info, $info, contrast-color($info));
+@include tooltip-theme(danger, $danger, contrast-color($danger));
+@include tooltip-theme(success, $success, contrast-color($success));
+@include tooltip-theme(warning, $warning, contrast-color($warning));
+
+.ui-ribbon {
+  position   : absolute;
+  top        : 0;
+  right      : 0;
+  font-size  : 0.9rem;
+  padding    : 0.25em 3em;
+  z-index    : 10;
+  color      : $dark;
+  background : $light;
+  font-weight: 400;
+  box-shadow : 0 0 4px 1px rgba(0,0,0,.5);
+  @include transform(rotate(45deg) translate(30%, -50%));
+
+  &.ui-small {
+    font-size: 0.5em;
+  }
+}
+@include ribbon-theme(primary, $primary, contrast-color($primary));
+@include ribbon-theme(secondary, $secondary, contrast-color($secondary));
+@include ribbon-theme(dark, $dark, contrast-color($dark));
+@include ribbon-theme(info, $info, contrast-color($info));
+@include ribbon-theme(danger, $danger, contrast-color($danger));
+@include ribbon-theme(success, $success, contrast-color($success));
+@include ribbon-theme(warning, $warning, contrast-color($warning));
+
+//BADGES
+.ui-has-badge {}
+
+.ui-badge {
+  display       : inline-block;
+  line-height   : 1;
+  order         : 9;
+  padding       : 0.25em 0.5em;
+  background    : none !important;
+  pointer-events: none;
+
+  &:after {
+    content      : attr(data-value);
+    position     : absolute;
+    top          : 50%;
+    right        : 0;
+    border-radius: 1em;
+    padding      : 0.25em 0.5em;
+    color        : $light;
+    background   : $muted;
+    box-shadow   : 0 0 2px 0 rgba($base-shadow-color, .25);
+    @include transform(translateY(-50%) scale(.75));
+  }
+
+  &.ui-dark:after {
+    background: $dark;
+  }
+
+  &.ui-primary:after {
+    background: $primary;
+  }
+
+  &.ui-secondary:after {
+    background: $secondary;
+  }
+
+  &.ui-info:after {
+    background: $info;
+  }
+
+  &.ui-danger:after {
+    background: $danger;
+  }
+
+  &.ui-success:after {
+    background: $success;
+  }
+
+  &.ui-warning:after {
+    background: $warning;
+  }
+}
+
+.rtl,
+[dir="rtl"] {
+  .ui-badge:after {
+    right: auto;
+    left : 0;
+  }
+
+  &.ui-tether-left {
+    margin-left: 0.5em;
+  }
+
+  &.ui-tether-right {
+    margin-left: -.5em;
+  }
+}

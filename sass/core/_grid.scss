@@ -1,0 +1,153 @@
+//
+// @description :
+// @author      : Adarsh Pastakia
+// @copyright   : 2016
+// @license     : MIT
+@mixin grid-columns($prefix, $size) {
+   @media only screen and (min-width : $size){
+    @if($size > $grid-sm-min) {
+      .ui-container {
+        max-width: $size - 16px;
+      }
+    }
+
+    .ui-hide-#{$prefix}-up {
+      display: none;
+    }
+    @for $i from 1 through 12 {
+      .ui-column-#{$prefix}-#{$i} {
+        @include flex(0 0 (($i/12)*100%));
+      }
+    }
+  }
+  @media only screen and (max-width : $size) {
+    .ui-hide-#{$prefix}-down {
+      display: none;
+    }
+  }
+}
+
+.ui-container {
+  display: block;
+  margin : 0 auto;
+  width  : 100%;
+}
+
+.ui-row {
+  @include flexbox($direction: row);
+
+  > hr {
+    @include flex(1 1 100%);
+  }
+
+  &.ui-gutter {
+    padding: $grid-gutter;
+
+    .ui-column {
+      box-sizing: border-box;
+      padding   : $grid-gutter;
+
+      &.ui-row {
+        padding: 0;
+      }
+
+      > .ui-row {
+        margin : -1 * $grid-gutter;
+        padding: 0;
+      }
+    }
+  }
+
+  &-h-reverse {
+    @include flex-direction(row-reverse);
+  }
+
+  &-v {
+    @include flex-direction(column);
+
+    &-reverse {
+      @include flex-direction(column-reverse);
+    }
+  }
+
+  &.ui-nowrap {
+    @include flex-wrap(nowrap);
+  }
+
+  &.ui-align-start {
+    @include align-items(flex-start);
+  }
+
+  &.ui-align-center {
+    @include align-items(center);
+  }
+
+  &.ui-align-end {
+    @include align-items(flex-end);
+  }
+
+  &.ui-align-stretch {
+    @include align-items(stretch);
+  }
+
+  &.ui-justify-start {
+    @include justify-content(flex-start);
+  }
+
+  &.ui-justify-center {
+    @include justify-content(center);
+  }
+
+  &.ui-justify-end {
+    @include justify-content(flex-end);
+  }
+
+  &.ui-justify-around {
+    @include justify-content(space-around);
+  }
+
+  &.ui-justify-between {
+    @include justify-content(space-between);
+  }
+}
+
+.ui-column {
+  @include flex-basis(100%);
+
+  &-auto {
+    @include flex-auto();
+  }
+
+  &-fill {
+    @include flex-fill();
+  }
+
+  // &:not(.ui-column-auto) {
+  //   overflow: hidden;
+  // }
+
+  &-form {
+    @include flex(1 0 24em);
+  }
+
+  &.ui-self-top {
+    @include align-self(flex-start);
+  }
+
+  &.ui-self-middle {
+    @include align-self(center);
+  }
+
+  &.ui-self-bottom {
+    @include align-self(flex-end);
+  }
+
+  &.ui-self-stretch {
+    @include align-self(stretch);
+  }
+}
+@include grid-columns(xs, $grid-xs-min);
+@include grid-columns(sm, $grid-sm-min);
+@include grid-columns(md, $grid-md-min);
+@include grid-columns(lg, $grid-lg-min);
+@include grid-columns(xl, $grid-xl-min);

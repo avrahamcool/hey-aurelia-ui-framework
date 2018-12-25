@@ -1,0 +1,108 @@
+//
+// @description :
+// @author      : Adarsh Pastakia
+// @copyright   : 2017
+// @license     : MIT
+
+.ui-option-group {
+  .ui-group-wrapper {
+    background: none;
+    box-shadow: none;
+    flex-wrap : wrap;
+    @include flex(1 1 1em);
+
+    .ui-option {
+      margin: 0 0 .25em;
+    }
+  }
+
+  &:not(.ui-vertical) {
+    &.cols-1 .ui-option {
+      @include flex(0 1 100%);
+    }
+
+    &.cols-2 .ui-option {
+      @include flex(0 1 50%);
+    }
+
+    &.cols-3 .ui-option {
+      @include flex(0 1 33%);
+    }
+
+    &.cols-4 .ui-option {
+      @include flex(0 1 25%);
+    }
+
+    &.cols-5 .ui-option {
+      @include flex(0 1 20%);
+    }
+  }
+
+  &.ui-vertical .ui-group-wrapper {
+    flex-direction: column;
+  }
+}
+
+.ui-option {
+  line-height: 1;
+  font-size  : 1.25em;
+  white-space: nowrap;
+  position   : relative;
+  @include flexbox($direction: row, $display: inline-flex, $wrap:false);
+
+  input {
+    width   : 100%;
+    height  : 1em;
+    opacity : 0;
+    margin  : 0;
+    z-index : 5;
+    cursor  : pointer;
+    position: absolute;
+  }
+
+  span {
+    color: $input-text;
+  }
+
+  .ui-icon {
+    pointer-events: none;
+  }
+
+  &:focus,
+  &:hover {
+    color: $input-focus-border;
+  }
+
+  .ui-option-label {
+    color      : $input-label-text;
+    font-size  : .75em;
+    line-height: 1.25;
+    padding    : 0 .25em;
+    @include ellipsis();
+    @include flex(0 1 auto);
+  }
+
+  &.ui-radio input:checked ~ .off {
+    display: none;
+  }
+
+  &.ui-radio input:not(:checked) ~ .on {
+    display: none;
+  }
+
+  &.ui-disabled {
+    .ui-option-label {
+      color: rgba($input-label-text, .5);
+    }
+
+    span {
+      color: rgba($input-text, .5) !important;
+    }
+
+    &:after {
+      content   : '';
+      @include position(absolute, 0);
+      background: rgba($input-disabled-bg, 0.1);
+    }
+  }
+}

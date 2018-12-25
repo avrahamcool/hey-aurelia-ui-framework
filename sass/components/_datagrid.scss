@@ -1,0 +1,192 @@
+//
+// @description :
+// @author      : Adarsh Pastakia
+// @copyright   : 2017
+// @license     : MIT
+
+.ui-datagrid {
+  position : relative;
+  @include flex-fill(1em);
+  @include flexbox($direction: column, $wrap: false, $align: stretch);
+
+  // Fix for firefox extending the grid wrapper outside container
+  max-width: 100%;
+
+  &.ui-auto-size > .ui-dg-body {
+    overflow: hidden;
+    @include flex-basis(auto);
+  }
+
+  .ui-dg-ghost {
+    position   : absolute;
+    display    : none;
+    top        : 0;
+    border-left: 1px dashed $muted;
+
+    &.resizing {
+      display: block;
+    }
+  }
+
+  .ui-dg-row {
+    background: white;
+    @include flexbox($wrap:false, $align:stretch);
+
+    &:nth-child(odd) .ui-dg-cell {
+      background: $datagrid-row-odd-bg;
+    }
+
+    &:nth-child(even) .ui-dg-cell {
+      background: $datagrid-row-even-bg;
+    }
+
+    &.ui-last-row {
+      min-height: 10px;
+      @include flex-fill(0);
+
+      .ui-dg-cell {
+        background: $base-bg !important;
+      }
+    }
+
+    &:not(.ui-last-row) {
+      @include flex-auto();
+    }
+
+    .ui-dg-lock-group {
+      background: white;
+      z-index   : 1;
+      @include flex-auto();
+      @include flexbox($wrap:false, $align:stretch);
+    }
+
+    .ui-dg-cell {
+      color: $datagrid-row-text;
+      @include flex-auto();
+      @include flexbox($wrap:false, $align: center);
+      @include border(end, 1px solid rgba($lightGray, .5));
+
+      > .ui-dg-cell-content {
+        padding: .25em .5em;
+        @include ellipsis();
+        @include flex-fill();
+      }
+
+      &.btn-fix > .ui-dg-cell-content {
+        padding: 0 .25em;
+      }
+
+      &.last-cell {
+        border: none;
+        @include flex-fill(2em);
+      }
+
+      &.ui-cell-checkbox {
+        width  : 2em;
+        padding: .35em;
+        color  : $muted;
+
+        &:hover {
+          color: $secondary;
+        }
+      }
+
+      &.ui-row-head {
+        font-size : .8em;
+        background: $datagrid-row-head-bg !important;
+        color     : $datagrid-row-head-text;
+      }
+    }
+
+    &.ui-selected .ui-dg-cell {
+      background-color: $datagrid-row-selected-bg;
+    }
+  }
+
+  .ui-dg-head {
+    overflow   : hidden;
+    font-weight: $font-weight-medium;
+    @include flex-auto();
+
+    > .ui-dg-row .ui-dg-col-group {
+      @include flex-auto();
+
+      > .ui-dg-col-group-title {
+        text-align   : center;
+        padding      : .25em .1em;
+        background   : $datagrid-header-bg;
+        color        : $datagrid-header-text;
+        border-bottom: 1px dotted rgba($lightGray, .75);
+        @include flex-fill(100%);
+        @include border(end, 1px solid rgba($lightGray, .5));
+      }
+
+      > .ui-dg-col-group-cells {
+        @include flexbox($wrap:false, $align:stretch);
+      }
+    }
+
+    > .ui-dg-row .ui-dg-cell {
+      background: $datagrid-header-bg !important;
+      color     : $datagrid-header-text;
+
+      > .ui-dg-cell-icon {
+        padding: .25em .1em;
+        @include flex-auto();
+
+        &.ui-filter {
+          cursor: pointer;
+          color : rgba($datagrid-header-text, .6);
+
+          &.ui-active,
+          &:hover {
+            color: rgba($datagrid-header-text, .9);
+          }
+        }
+
+        &.ui-sort {
+          width   : 1em;
+          height  : 1.25em;
+          position: relative;
+          color   : rgba($datagrid-header-text, .5);
+
+          .ui-icon {
+            position: absolute;
+            height  : .75em;
+
+            &:first-child {
+              top: 0;
+            }
+
+            &:last-child {
+              bottom: 0;
+            }
+          }
+
+          &.asc .ui-icon:first-child,
+          &.desc .ui-icon:last-child {
+            color: rgba($datagrid-header-text, .9);
+          }
+        }
+      }
+
+      > .ui-dg-cell-resize {
+        width : 2px;
+        cursor: ew-resize;
+        @include align-self(stretch);
+        @include border(start, 1px solid rgba($datagrid-header-text, .5));
+      }
+    }
+  }
+
+  .ui-dg-body {
+    @include scroll();
+    @include flex-fill();
+    @include flexbox($direction: column, $wrap: false, $align: flex-start);
+
+    &.ui-row-hilight .ui-dg-row:hover .ui-dg-cell {
+      background-color: $datagrid-row-hilight-bg;
+    }
+  }
+
+}

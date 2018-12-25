@@ -1,0 +1,48 @@
+//
+// @description :
+// @author      : Adarsh Pastakia
+// @copyright   : 2017
+// @license     : MIT
+
+// Vars
+@import "colors";
+@import "mixins";
+@import "utils/themes";
+$colors: (
+  ('red',   $red,     $white),
+  ('pink',  $pink,    $white),
+  ('violet',$violet,  $white),
+  ('purple',$purple,  $white),
+  ('indigo',$indigo,  $white),
+  ('blue',  $blue,    $white),
+  ('cyan',  $cyan,    $white),
+  ('teal',  $teal,    $white),
+  ('green', $green,   $white),
+  ('lime',  $lime,    $dark),
+  ('yellow',$yellow,  $dark),
+  ('amber', $amber,   $dark),
+  ('orange',$orange,  $white),
+  ('brown', $brown,   $white),
+  ('lightGray',  $lightGray,    $dark),
+  ('darkGray',  $darkGray,    $white)
+);
+@each $key, $color, $text in $colors {
+
+  @include color-property(bg, $key, background-color, $color);
+  @include color-property(text, $key, color, $color);
+  @include color-property(border, $key, border-color, $color);
+
+  @include switch-theme($key, $onBg: $color, $onText: $text);
+  @include toolbar-theme($key, $color, $text);
+  @include statsbar-theme(bg-#{$key}, $text, $color);
+  @include statsbar-theme($key, $color);
+  @include toast-theme($key, $color, $text);
+  @include header-theme($key, $color, $text);
+  @include breadcrumb-theme($key, $color, $text);
+
+  @include chip-theme($key, $color, $text);
+  @include ribbon-theme($key, $color, $text);
+  @include tooltip-theme($key, $color, $text);
+
+  @include button-theme($key, $color, $white, lighten($color, 10%), $white, darken($color, 10%), $white);
+}

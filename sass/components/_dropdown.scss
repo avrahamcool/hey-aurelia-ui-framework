@@ -1,0 +1,155 @@
+//
+// @description :
+// @author      : Adarsh Pastakia
+// @copyright   : 2017
+// @license     : MIT
+
+.ui-dropdown {
+  background : $base-comp-bg;
+  cursor     : pointer;
+  position   : relative;
+  display    : inline-block;
+  line-height: 1;
+  margin     : 0.25rem;
+  box-shadow : 0 0 1px 0 rgba(0,0,0,.2);
+
+  &:not(.ui-invalid) .ui-invalid-icon {
+    display: none;
+  }
+
+  .ui-invalid-icon {
+    margin: 0.5em;
+    color : $input-error-text;
+  }
+
+  .ui-addon-icon {
+    line-height: 1.2;
+    padding    : 0.5em;
+    background : rgba($dark, .1);
+  }
+
+  .ui-label {
+    @include flexbox($direction: row, $wrap:false, $align: center);
+
+    span {
+      line-height: 1.7;
+      padding    : 0.25em 0.5em;
+      @include ellipsis();
+      @include flex-fill();
+    }
+  }
+
+  .ui-caret {
+    font-size: 0.8em;
+    position : relative;
+    top      : 0.1em;
+    margin   : 0 0.5em;
+    color    : rgba($input-text, .5);
+  }
+
+  &:hover .ui-caret {
+    color: rgba($input-text, .85);
+  }
+
+  &.ui-open {
+    &.ui-tether-top {
+      box-shadow: 0 0 2px 0 $base-shadow-color;
+    }
+
+    &.ui-tether-bottom {
+      box-shadow: 0 0 2px 0 $base-shadow-color;
+    }
+
+    .ui-list-container {
+      display   : block;
+    }
+  }
+
+  &.ui-disabled {
+    pointer-events: none;
+
+    &:after {
+      content   : '';
+      @include position(absolute, 0);
+      background: rgba($input-disabled-bg, 0.5);
+    }
+  }
+}
+
+.ui-floating {
+  background-color: $base-bg;
+  color           : $base-text;
+  border-radius   : $base-border-radius;
+  position        : fixed;
+  z-index         : $z-index-floating;
+  border          : 1px solid rgba($base-border-color, .25);
+  @include scroll();
+  @include box-shadow(0 0 8px 0 $base-shadow-color);
+
+  &.ui-tether-top {
+    border-top-left-radius : 0;
+    border-top-right-radius: 0;
+    box-shadow             : 0 8px 16px 0 $base-shadow-color;
+  }
+
+  &.ui-tether-bottom {
+    border-bottom-left-radius : 0;
+    border-bottom-right-radius: 0;
+    box-shadow                : 0 -8px 16px 0 $base-shadow-color;
+  }
+
+  &:not(.ui-open) {
+    display: none;
+  }
+}
+
+.ui-list-container {
+  max-height: 20rem;
+  overflow  : auto;
+  color     : $input-text;
+  background: $input-bg;
+  list-style: none;
+  padding   : 0;
+  margin    : 0;
+
+  .ui-list-group {
+    color      : $muted;
+    display    : list-item;
+    font-size  : 0.8em;
+    line-height: 1.5em;
+    padding    : 0 0.5em;
+  }
+
+  .ui-list-item {
+    line-height: 2em;
+    padding    : 0 0.5em;
+    cursor     : pointer;
+    display    : list-item;
+    list-style : none;
+
+    .ui-icon {
+      @include margin(end, 0.5em);
+    }
+
+    * {
+      pointer-events: none;
+    }
+
+    &.ui-disabled {
+      pointer-events: none;
+      color         : $muted;
+      background    : none;
+    }
+
+    &.ui-hilight {
+      color     : $list-hover-text;
+      background: $list-hover-bg;
+    }
+
+    &.ui-selected,
+    &:active {
+      color     : $list-selected-text;
+      background: $list-selected-bg;
+    }
+  }
+}
