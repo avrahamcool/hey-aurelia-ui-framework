@@ -67,6 +67,8 @@ export declare class UIDialog {
     maximizable: boolean;
     closable: boolean;
     maximized: boolean;
+    closeWhenOverlayClicked: boolean;
+    overlayClicked(event: any): void;
     focus(): void;
     makeActive(): void;
     makeInactive(): void;

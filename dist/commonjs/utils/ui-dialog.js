@@ -89,7 +89,7 @@ var UIDialogService = (function () {
     UIDialogService.prototype.createDialog = function (vm) {
         if (!(vm instanceof UIDialog))
             throw new Error("ViewModel must extend from UIDialog");
-        var viewFactory = this.compiler.compile("<template><div class=\"${modal?'ui-modal':''} au-animate ui-dialog-wrapper\" ref=\"dialogWrapperEl\">\n      <div class=\"ui-dialog ${isActive?'ui-active':'ui-inactive'}\" ref=\"dialogEl\" css.bind=\"posCurrent\">\n      <ui-header theme.bind=\"theme\">\n        <ui-header-title glyph=\"${glyph}\">${title}</ui-header-title>\n        <ui-header-tool minimize click.trigger=\"collapse($event)\" if.bind=\"minimizable && !modal\"></ui-header-tool>\n        <ui-header-tool glyph=\"${isMaximized?'glyph-dialog-restore':'glyph-dialog-expand'}\" click.trigger=\"expand($event)\" if.bind=\"maximizable\"></ui-header-tool>\n        <ui-header-tool close click.trigger=\"close($event)\" if.bind=\"closable\"></ui-header-tool>\n      </ui-header>\n      <ui-glyph class=\"ui-resizer\" glyph=\"glyph-dialog-resize\" if.bind=\"resizable\"></ui-glyph>\n      </div></div></template>", this.resources);
+        var viewFactory = this.compiler.compile("<template><div class=\"${modal?'ui-modal':''} au-animate ui-dialog-wrapper\" ref=\"dialogWrapperEl\" click.trigger=\"overlayClicked($event)\">\n      <div class=\"ui-dialog ${isActive?'ui-active':'ui-inactive'}\" ref=\"dialogEl\" css.bind=\"posCurrent\">\n      <ui-header theme.bind=\"theme\">\n        <ui-header-title glyph=\"${glyph}\">${title}</ui-header-title>\n        <ui-header-tool minimize click.trigger=\"collapse($event)\" if.bind=\"minimizable && !modal\"></ui-header-tool>\n        <ui-header-tool glyph=\"${isMaximized?'glyph-dialog-restore':'glyph-dialog-expand'}\" click.trigger=\"expand($event)\" if.bind=\"maximizable\"></ui-header-tool>\n        <ui-header-tool close click.trigger=\"close($event)\" if.bind=\"closable\"></ui-header-tool>\n      </ui-header>\n      <ui-glyph class=\"ui-resizer\" glyph=\"glyph-dialog-resize\" if.bind=\"resizable\"></ui-glyph>\n      </div></div></template>", this.resources);
         var view = viewFactory.create(this.container);
         view.bind(vm);
         return view;
@@ -315,6 +315,7 @@ var UIDialog = (function () {
         this.maximizable = true;
         this.closable = true;
         this.maximized = false;
+        this.closeWhenOverlayClicked = false;
     }
     UIDialog_1 = UIDialog;
     UIDialog.prototype.bind = function (bindingContext, overrideContext) {
@@ -337,6 +338,10 @@ var UIDialog = (function () {
     UIDialog.prototype.attached = function () {
         if (this.maximized)
             this.expand(null);
+    };
+    UIDialog.prototype.overlayClicked = function (event) {
+        if (this.closeWhenOverlayClicked && event.target == this.dialogWrapperEl)
+            this.close();
     };
     UIDialog.prototype.focus = function () {
         var _this = this;

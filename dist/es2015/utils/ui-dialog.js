@@ -85,7 +85,7 @@ let UIDialogService = class UIDialogService {
     createDialog(vm) {
         if (!(vm instanceof UIDialog))
             throw new Error("ViewModel must extend from UIDialog");
-        var viewFactory = this.compiler.compile(`<template><div class="\${modal?'ui-modal':''} au-animate ui-dialog-wrapper" ref="dialogWrapperEl">
+        var viewFactory = this.compiler.compile(`<template><div class="\${modal?'ui-modal':''} au-animate ui-dialog-wrapper" ref="dialogWrapperEl" click.trigger="overlayClicked($event)">
       <div class="ui-dialog \${isActive?'ui-active':'ui-inactive'}" ref="dialogEl" css.bind="posCurrent">
       <ui-header theme.bind="theme">
         <ui-header-title glyph="\${glyph}">\${title}</ui-header-title>
@@ -313,6 +313,7 @@ let UIDialog = UIDialog_1 = class UIDialog {
         this.maximizable = true;
         this.closable = true;
         this.maximized = false;
+        this.closeWhenOverlayClicked = false;
     }
     bind(bindingContext, overrideContext) {
         let isRtl = window.isRtl(UIUtils.dialogContainer);
@@ -334,6 +335,10 @@ let UIDialog = UIDialog_1 = class UIDialog {
     attached() {
         if (this.maximized)
             this.expand(null);
+    }
+    overlayClicked(event) {
+        if (this.closeWhenOverlayClicked && event.target == this.dialogWrapperEl)
+            this.close();
     }
     focus() {
         UIEvent.queueTask(() => {
