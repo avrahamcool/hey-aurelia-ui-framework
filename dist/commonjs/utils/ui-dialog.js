@@ -342,6 +342,7 @@ var UIDialog = (function () {
     UIDialog.prototype.overlayClicked = function (event) {
         if (this.closeWhenOverlayClicked && event.target == this.dialogWrapperEl)
             this.close();
+        return true;
     };
     UIDialog.prototype.focus = function () {
         var _this = this;

@@ -339,6 +339,7 @@ let UIDialog = UIDialog_1 = class UIDialog {
     overlayClicked(event) {
         if (this.closeWhenOverlayClicked && event.target == this.dialogWrapperEl)
             this.close();
+        return true;
     }
     focus() {
         UIEvent.queueTask(() => {

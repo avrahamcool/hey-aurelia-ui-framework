@@ -391,6 +391,7 @@ export class UIDialog {
   overlayClicked(event)
   {
     if(this.closeWhenOverlayClicked && event.target == this.dialogWrapperEl) this.close();
+    return true;
   }
 
   focus() {
