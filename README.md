@@ -2,6 +2,18 @@
 
 #### A bespoke UI Framework built on Aurelia for desktop business application
 
+Instructions:
+temporarly change the package name to `aurelia-ui-framework`,
+run yarn link
+run yarn link aurelia-ui-framework
+
+make changes.
+
+run yarn build:source
+run yarn unlink aurelia-ui-framework
+run yarn
+change the package name to `hey-aurelia-ui-framework`,
+publish
 
 [![npm version](https://img.shields.io/npm/v/aurelia-ui-framework.svg?style=flat-square)](https://www.npmjs.com/package/aurelia-ui-framework)
 [![npm downloads](https://img.shields.io/npm/dt/aurelia-ui-framework.svg?style=flat-square)](https://www.npmjs.com/package/aurelia-ui-framework)
