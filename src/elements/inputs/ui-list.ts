@@ -1,3 +1,4 @@
+import { DgBasic } from './../../../examples/src/datagrids/basic';
 //
 // @description :
 // @author      : Adarsh Pastakia
@@ -292,20 +293,23 @@ export class BaseList {
     this.dropdown.scrollTop = 0;
 
     let groups = [];
-    let rx = new RegExp(this.elValue.ascii(), 'i');
+    //let rx = new RegExp(this.elValue.ascii(), 'i');
+    let valueToSearch = this.elValue.ascii();
     _.forEach(_.cloneDeep(this.original), (v, k) => {
       let list = _.filter(v.items, (n: any) => {
-        var lbl = n.text + '';
-        let asc = lbl.ascii();
-        if (rx.test(asc)) {
-          let start = asc.search(rx);
-          lbl = lbl.substr(0, start + this.elValue.length) + '</u>' +
-            lbl.substr(start + this.elValue.length);
-          lbl = lbl.substr(0, start) + '<u>' + lbl.substr(start);
-          n.display = lbl;
-          return true;
-        }
-        return false;
+        n.display = n.text + '';
+        return n.display.startsWith(valueToSearch);
+        // var lbl = n.text + '';
+        // let asc = lbl.ascii();
+        // if (rx.test(asc)) {
+        //   let start = asc.search(rx);
+        //   lbl = lbl.substr(0, start + this.elValue.length) + '</u>' +
+        //     lbl.substr(start + this.elValue.length);
+        //   lbl = lbl.substr(0, start) + '<u>' + lbl.substr(start);
+        //   n.display = lbl;
+        //   return true;
+        // }
+        // return false;
       });
       if (list.length !== 0) groups.push({ label: v.label, items: list });
     });
@@ -344,18 +348,18 @@ export class BaseList {
 @inlineView(`<template class="ui-input-wrapper ui-input-list" css.bind="{width: width}"><div role="input" class="ui-input-control"><slot></slot>
   <span class="ui-error" if.bind="errors"><ui-glyph glyph="glyph-invalid"></ui-glyph><ul class="ui-error-list"><li repeat.for="err of errors" innerhtml.bind="err"></li></ul></span>
   <input ref="inputEl" value.bind="elValue" autocomplete="off" size="1" dir.bind="dir"
-    focus.trigger="fireEvent($event)" blur.trigger="fireEvent($event)" click.trigger="openDropdown($event)"
-    input.trigger="search() & debounce:200" change.trigger="fireEvent($event)" select.trigger="$event.stopPropagation()"
-    keydown.trigger="keyDown($event)" placeholder.bind="placeholder"
+    focus.delegate="fireEvent($event)" blur.delegate="fireEvent($event)" click.delegate="openDropdown($event)"
+    input.delegate="search() & debounce:200" change.delegate="fireEvent($event)" select.delegate="$event.stopPropagation()"
+    keydown.delegate="keyDown($event)" placeholder.bind="placeholder"
     disabled.bind="isDisabled" readonly.bind="!allowSearch || readonly"/>
-  <span class="ui-clear" if.bind="clear && value" click.trigger="clearInput()">&times;</span>
-  <span class="ui-input-addon ui-dropdown-handle" click.trigger="toggleDropdown($event)"><ui-glyph glyph="glyph-chevron-down"></ui-glyph></span></div>
+  <span class="ui-clear" if.bind="clear && value" click.delegate="clearInput()">&times;</span>
+  <span class="ui-input-addon ui-dropdown-handle" click.delegate="toggleDropdown($event)"><ui-glyph glyph="glyph-chevron-down"></ui-glyph></span></div>
 
   <div class="ui-list-container ui-floating" ref="dropdown" dir.bind="dir">
     <div if.bind="filtered.length==0" class="ui-text-muted ui-pad-h">\${emptyText}</div>
     <template repeat.for="group of filtered"><div if.bind="group.label" class="ui-list-group">\${group.label}</div>
     <div class="ui-list-item \${item.value==value?'ui-selected':''} \${item.disabled?'ui-disabled':''}" repeat.for="item of group.items"
-      mouseover.trigger="hilightItem($event)" click.trigger="fireSelect(item.model)">
+      mouseover.delegate="hilightItem($event)" click.delegate="fireSelect(item.model)">
       <span class="\${iconClass} \${item.icon}" if.bind="item.icon"></span>&nbsp;<span innerhtml.bind="getDisplay(item)"></span></div>
     </template></div>
   <div class="ui-input-info" if.bind="helpText" innerhtml.bind="helpText"></div>
@@ -393,11 +397,11 @@ export class UICombo extends BaseList {
 @autoinject()
 @inlineView(`<template class="ui-input-wrapper ui-input-list ui-tags" css.bind="{width: width}"><div role="input" class="ui-input-control" dir.bind="dir"><slot></slot>
   <span class="ui-error" if.bind="errors"><ui-glyph glyph="glyph-invalid"></ui-glyph><ul class="ui-error-list"><li repeat.for="err of errors" innerhtml.bind="err"></li></ul></span>
-  <div class="ui-tag-item" repeat.for="tag of value | split" if.bind="tag!=''"><span innerhtml.bind="getTagText(tag)"></span><i class="ui-clear" click.trigger="removeValue(tag)">&times;</i></div>
+  <div class="ui-tag-item" repeat.for="tag of value | split" if.bind="tag!=''"><span innerhtml.bind="getTagText(tag)"></span><i class="ui-clear" click.delegate="removeValue(tag)">&times;</i></div>
   <input ref="inputEl" value.bind="elValue" autocomplete="off" size="1"
-    focus.trigger="fireEvent($event)" blur.trigger="fireEvent($event)" select.trigger="$event.stopPropagation()"
-    input.trigger="search() & debounce:200" change.trigger="fireEvent($event)"
-    keydown.trigger="keyDown($event)" placeholder.bind="placeholder"
+    focus.delegate="fireEvent($event)" blur.delegate="fireEvent($event)" select.delegate="$event.stopPropagation()"
+    input.delegate="search() & debounce:200" change.delegate="fireEvent($event)"
+    keydown.delegate="keyDown($event)" placeholder.bind="placeholder"
     disabled.bind="isDisabled" readonly.bind="!allowSearch || readonly"/></div>
   <div class="ui-input-info" if.bind="helpText" innerhtml.bind="helpText"></div>
 
@@ -405,7 +409,7 @@ export class UICombo extends BaseList {
     <div if.bind="filtered.length==0" class="ui-text-muted ui-pad-h">\${emptyText}</div>
     <template repeat.for="group of filtered"><div if.bind="group.label" class="ui-list-group">\${group.label}</div>
     <div class="ui-list-item \${item.disabled?'ui-disabled':''}" repeat.for="item of group.items"
-      mouseover.trigger="hilightItem($event)" click.trigger="fireSelect(item.model)">
+      mouseover.delegate="hilightItem($event)" click.delegate="fireSelect(item.model)">
       <span class="\${iconClass} \${item.icon}" if.bind="item.icon"></span>&nbsp;<span innerhtml.bind="item.display"></span></div>
     </template>
   </div>
@@ -480,17 +484,17 @@ export class UITags extends BaseList {
 @inlineView(`<template class="ui-input-wrapper ui-input-list ui-listbox" css.bind="{width: width}"><div role="input" class="ui-input-control">
   <span class="ui-error" if.bind="errors"><ui-glyph glyph="glyph-invalid"></ui-glyph><ul class="ui-error-list"><li repeat.for="err of errors" innerhtml.bind="err"></li></ul></span>
   <input ref="inputEl" value.bind="elValue" class="ui-input ui-remove" autocomplete="off"
-    focus.trigger="fireEvent($event)" blur.trigger="fireEvent($event)" size="1"
-    input.trigger="search() & debounce:200" change.trigger="fireEvent($event)"
-    keydown.trigger="keyDown($event)" placeholder.bind="placeholder" select.trigger="$event.stopPropagation()"
+    focus.delegate="fireEvent($event)" blur.delegate="fireEvent($event)" size="1"
+    input.delegate="search() & debounce:200" change.delegate="fireEvent($event)"
+    keydown.delegate="keyDown($event)" placeholder.bind="placeholder" select.delegate="$event.stopPropagation()"
     disabled.bind="isDisabled" readonly.bind="true"/>
-  <span class="ui-clear" if.bind="clear && value" click.trigger="clearInput()">&times;</span>
+  <span class="ui-clear" if.bind="clear && value" click.delegate="clearInput()">&times;</span>
 
-  <div class="ui-list-container" ref="dropdown" mouseout.trigger="unhilightItem()" dir.bind="dir">
+  <div class="ui-list-container" ref="dropdown" mouseout.delegate="unhilightItem()" dir.bind="dir">
     <div if.bind="filtered.length==0" class="ui-text-muted ui-pad-h">\${emptyText}</div>
     <template repeat.for="group of filtered"><div if.bind="group.label" class="ui-list-group">\${group.label}</div>
     <div class="ui-list-item \${item.value==value?'ui-selected':''} \${item.disabled?'ui-disabled':''}" repeat.for="item of group.items"
-      mouseover.trigger="hilightItem($event)" click.trigger="fireSelect(item.model)">
+      mouseover.delegate="hilightItem($event)" click.delegate="fireSelect(item.model)">
       <span class="\${iconClass} \${item.icon}" if.bind="item.icon"></span>&nbsp;<span innerhtml.bind="getDisplay(item)"></span></div>
     </template>
   </div></div>
