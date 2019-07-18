@@ -75,7 +75,7 @@
     "browser-sync": "^2.13.0",
     "connect-history-api-fallback": "^1.2.0",
     "debounce": "^1.0.2",
-    "del": "^3.0.0",
+    "del": "^5.0.0",
     "event-stream": "^4.0.1",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-bump": "^2.8.0",
