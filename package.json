@@ -112,7 +112,7 @@
     "typescript": ">=1.9.0-dev || ^2.0.0",
     "uglify-js": "^3.0.19",
     "vinyl-fs": "^2.4.3",
-    "vinyl-paths": "^2.1.0",
+    "vinyl-paths": "^3.0.0",
     "yargs": "^13.3.0"
   }
 }
