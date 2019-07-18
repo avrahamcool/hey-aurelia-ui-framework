@@ -570,8 +570,8 @@ aurelia-binding@^2.0.0, aurelia-binding@^2.1.5, aurelia-binding@^2.1.7:
     aurelia-task-queue "^1.0.0"
 
 aurelia-bootstrapper@^2.3.0:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/aurelia-bootstrapper/-/aurelia-bootstrapper-2.3.1.tgz#67c9bfc34ab09157efe4c59b8518a141112a432e"
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/aurelia-bootstrapper/-/aurelia-bootstrapper-2.3.3.tgz#d1dc85cb5cc9566185594928e19dd26dc845c28d"
   dependencies:
     aurelia-event-aggregator "^1.0.0"
     aurelia-framework "^1.3.0"
