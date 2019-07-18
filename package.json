@@ -92,7 +92,7 @@
     "gulp-watch": "^5.0.1",
     "highlightjs": "^9.10.0",
     "html-minifier": "^3.2.3",
-    "jasmine-core": "^2.4.1",
+    "jasmine-core": "^3.4.0",
     "karma": "^0.13.22",
     "karma-chrome-launcher": "^2.2.0",
     "karma-jasmine": "^2.0.1",
