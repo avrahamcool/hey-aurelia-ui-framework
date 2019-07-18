@@ -64,7 +64,7 @@
   "devDependencies": {
     "@types/amcharts": "0.0.41",
     "@types/jasmine": "^2.6.3",
-    "@types/node": "^6.0.45",
+    "@types/node": "^12.6.6",
     "amcharts3": "amcharts/amcharts3",
     "aurelia-animator-css": "^1.0.4",
     "aurelia-bootstrapper": "^2.3.0",
