@@ -287,8 +287,9 @@ ajv@^6.5.5:
     uri-js "^4.2.2"
 
 amcharts3@amcharts/amcharts3:
-  version "3.21.14"
-  resolved "https://codeload.github.com/amcharts/amcharts3/tar.gz/7f721d4adacf8005358e459c5fafeba000c83c8e"
+  version "3.21.15"
+  uid cac5a668652f271dd28c82a072da364c0bd708db
+  resolved "https://codeload.github.com/amcharts/amcharts3/tar.gz/cac5a668652f271dd28c82a072da364c0bd708db"
 
 amdefine@>=0.0.4, amdefine@^1.0.0:
   version "1.0.1"
