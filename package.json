@@ -62,7 +62,7 @@
   },
   "peerDependencies": {},
   "devDependencies": {
-    "@types/amcharts": "0.0.41",
+    "@types/amcharts": "3.21.4",
     "@types/jasmine": "^3.3.14",
     "@types/node": "^12.6.6",
     "amcharts3": "amcharts/amcharts3",
