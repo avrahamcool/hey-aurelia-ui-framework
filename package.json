@@ -82,7 +82,7 @@
     "gulp-changed-in-place": "^2.0.3",
     "gulp-conventional-changelog": "^2.0.19",
     "gulp-htmlmin": "^5.0.1",
-    "gulp-notify": "^2.2.0",
+    "gulp-notify": "^3.2.0",
     "gulp-plumber": "^1.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^4.0.2",
