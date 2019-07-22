@@ -93,7 +93,7 @@
     "highlightjs": "^9.10.0",
     "html-minifier": "^4.0.0",
     "jasmine-core": "^3.4.0",
-    "karma": "^0.13.22",
+    "karma": "^4.2.0",
     "karma-chrome-launcher": "^2.2.0",
     "karma-jasmine": "^2.0.1",
     "karma-jspm": "^2.2.3",
