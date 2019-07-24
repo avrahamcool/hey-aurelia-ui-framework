@@ -3202,7 +3202,7 @@ gulp-watch@^5.0.1:
     vinyl "^2.1.0"
     vinyl-file "^2.0.0"
 
-gulp@^4.0.1, "gulp@github:gulpjs/gulp#v4.0.2":
+gulp@^4.0.1, gulp@^4.0.2:
   version "4.0.2"
   uid "069350a5febf65adc27bc816a7805471b7d96f03"
   resolved "https://codeload.github.com/gulpjs/gulp/tar.gz/069350a5febf65adc27bc816a7805471b7d96f03"
