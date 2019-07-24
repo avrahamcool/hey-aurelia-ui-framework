@@ -309,8 +309,8 @@
     "@types/node" "*"
 
 "@types/jasmine@^3.3.14":
-  version "3.3.14"
-  resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-3.3.14.tgz#593440eef2793ed6c2beddf65850f4ed3028599c"
+  version "3.3.15"
+  resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-3.3.15.tgz#545be0670e828ac570566c45be570bbffcbc66d8"
 
 "@types/minimatch@*":
   version "3.0.3"
