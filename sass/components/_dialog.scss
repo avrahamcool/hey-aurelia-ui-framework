@@ -109,6 +109,7 @@
         line-height   : 1;
         opacity       : 0.3 !important;
         pointer-events: all !important;
+        user-select   : none;
 
         &:active,
         &:hover {
