@@ -725,9 +725,9 @@ aurelia-bootstrapper@^2.3.0:
     aurelia-templating-resources "^1.7.0"
     aurelia-templating-router "^1.0.0"
 
-aurelia-cli@1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/aurelia-cli/-/aurelia-cli-1.1.1.tgz#b7c3d48eada0ade975e38ed0fc69c8ec4953f4bc"
+aurelia-cli@1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/aurelia-cli/-/aurelia-cli-1.2.1.tgz#60ac4c581a46d9dee876cf8748ea1e8781f4a92c"
   dependencies:
     "@babel/core" "^7.5.5"
     "@babel/plugin-proposal-class-properties" "^7.5.5"
