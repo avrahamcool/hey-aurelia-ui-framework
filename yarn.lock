@@ -288,9 +288,9 @@
     "@nodelib/fs.scandir" "2.1.1"
     fastq "^1.6.0"
 
-"@types/amcharts@3.21.4":
-  version "3.21.4"
-  resolved "https://registry.yarnpkg.com/@types/amcharts/-/amcharts-3.21.4.tgz#76f7a9ee31eefa98fe3bf7a5182cdb6571d5c12e"
+"@types/amcharts@3.21.7":
+  version "3.21.7"
+  resolved "https://registry.yarnpkg.com/@types/amcharts/-/amcharts-3.21.7.tgz#aa95be64aebe2c1164616c6c8c15c35e4327b6ab"
 
 "@types/events@*":
   version "3.0.0"
